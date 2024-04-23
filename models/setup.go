@@ -21,7 +21,7 @@ func ConnectDB() {
 		panic(err)
 	}
 
-	if err := db.AutoMigrate(&User{}); err != nil {
+	if err := db.AutoMigrate(&User{}, &Product{}, &DetailProduct{}); err != nil {
 		panic(err)
 	}
 

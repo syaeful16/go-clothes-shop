@@ -131,3 +131,16 @@ func Register(w http.ResponseWriter, r *http.Request) {
 
 	helper.JSONResponse(w, http.StatusConflict, response)
 }
+
+func Logout(w http.ResponseWriter, r *http.Request) {
+	http.SetCookie(w, &http.Cookie{
+		Name:     "token",
+		Value:    "",
+		Path:     "/",
+		HttpOnly: true,
+		MaxAge:   -1,
+	})
+
+	response := map[string]string{"message": "Successful Logout"}
+	helper.JSONResponse(w, http.StatusOK, response)
+}
