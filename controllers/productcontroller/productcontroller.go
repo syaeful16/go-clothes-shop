@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"go-clothes-shop/helper"
-	"go-clothes-shop/middlewares"
 	"go-clothes-shop/models"
 	"net/http"
 	"strconv"
@@ -121,7 +120,7 @@ func Show(w http.ResponseWriter, r *http.Request) {
 }
 
 func Store(w http.ResponseWriter, r *http.Request) {
-	userID := r.Context().Value(middlewares.IdKey).(uint)
+	userID := r.Context().Value("id").(uint)
 	fmt.Println(userID)
 
 	var productInput models.Product
