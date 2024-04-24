@@ -6,6 +6,7 @@ import (
 	"go-clothes-shop/helper"
 	"go-clothes-shop/middlewares"
 	"go-clothes-shop/models"
+	"log"
 	"net/http"
 	"os"
 
@@ -45,7 +46,12 @@ func main() {
 	apiAdmin.HandleFunc("/product/{id}", productcontroller.Delete).Methods("DELETE")
 	apiAdmin.Use(middlewares.AdminRole)
 
-	if err := http.ListenAndServe(":8080", r); err != nil {
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
+	if err := http.ListenAndServe(":"+port, r); err != nil {
 		panic(err)
 	}
 }
