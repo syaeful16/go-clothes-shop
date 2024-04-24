@@ -1,17 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"go-clothes-shop/controllers/authcontroller"
 	"go-clothes-shop/controllers/productcontroller"
+	"go-clothes-shop/helper"
 	"go-clothes-shop/middlewares"
 	"go-clothes-shop/models"
-	"log"
 	"net/http"
 	"os"
 
 	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -21,15 +19,16 @@ func main() {
 
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// load
-		err := godotenv.Load()
-		if err != nil {
-			log.Fatalf("err loading: %v", err)
-		}
+		// err := godotenv.Load()
+		// if err != nil {
+		// 	log.Fatalf("err loading: %v", err)
+		// }
 		addr := os.Getenv("DB_HOST")
 		if addr == "" {
 			panic(addr)
 		}
-		fmt.Println(addr)
+		response := map[string]string{"message": addr}
+		helper.JSONResponse(w, http.StatusOK, response)
 	})
 	r.HandleFunc("/api/auth/login", authcontroller.Login).Methods("POST")
 	r.HandleFunc("/api/auth/register", authcontroller.Register).Methods("POST")
