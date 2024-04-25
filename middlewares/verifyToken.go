@@ -2,7 +2,6 @@ package middlewares
 
 import (
 	"context"
-	"fmt"
 	"go-clothes-shop/config"
 	"go-clothes-shop/helper"
 	"net/http"
@@ -84,9 +83,6 @@ func AdminRole(next http.Handler) http.Handler {
 			helper.JSONResponse(w, http.StatusUnauthorized, response)
 			return
 		}
-
-		fmt.Println(claims.UserId)
-		fmt.Println(claims.Role)
 
 		if claims.Role != "admin" {
 			response := map[string]string{"message": "Your account does not have access"}
