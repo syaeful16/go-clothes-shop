@@ -2,7 +2,6 @@ package productcontroller
 
 import (
 	"encoding/json"
-	"fmt"
 	"go-clothes-shop/helper"
 	"go-clothes-shop/models"
 	"net/http"
@@ -121,7 +120,6 @@ func Show(w http.ResponseWriter, r *http.Request) {
 
 func Store(w http.ResponseWriter, r *http.Request) {
 	userID := r.Context().Value("id").(uint)
-	fmt.Println(userID)
 
 	var productInput models.Product
 	decode := json.NewDecoder(r.Body)
@@ -147,7 +145,7 @@ func Store(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response := map[string]string{"message": "Success add product"}
-	helper.JSONResponse(w, http.StatusOK, response)
+	helper.JSONResponse(w, http.StatusCreated, response)
 }
 
 func Update(w http.ResponseWriter, r *http.Request) {
