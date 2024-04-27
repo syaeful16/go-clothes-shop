@@ -118,18 +118,11 @@ func Register(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// username has already been created
-		response := map[string]string{"message": "username has already been created"}
-		helper.JSONResponse(w, http.StatusFound, response)
-		return
 	}
 
-	response := map[string]interface{}{
-		"username": existinguser.Username,
-		"role":     existinguser.Role,
-	}
-
-	helper.JSONResponse(w, http.StatusConflict, response)
+	// username has already been created
+	response := map[string]string{"message": "username has already been created"}
+	helper.JSONResponse(w, http.StatusFound, response)
 }
 
 func Logout(w http.ResponseWriter, r *http.Request) {
