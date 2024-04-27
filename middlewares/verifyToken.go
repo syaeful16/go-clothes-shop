@@ -48,7 +48,9 @@ func JWTMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		next.ServeHTTP(w, r)
+		ctx := context.WithValue(r.Context(), IdKey, claims.UserId)
+
+		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
 
@@ -90,7 +92,7 @@ func AdminRole(next http.Handler) http.Handler {
 			return
 		}
 
-		ctx := context.WithValue(r.Context(), "id", claims.UserId)
+		ctx := context.WithValue(r.Context(), IdKey, claims.UserId)
 
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
