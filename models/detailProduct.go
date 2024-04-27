@@ -10,14 +10,3 @@ type DetailProduct struct {
 	ProductId string  `gorm:"type:varchar(255); not null" json:"product_id" validate:"required"`
 	ModelDefault
 }
-
-/*
-	{
-  "photo": "image.jpg",
-  "color": "blue",
-  "size": "M",
-  "stock": 2,
-  "price": 10000.00,
-  "product_id": "cloth1"
-}
-*/
