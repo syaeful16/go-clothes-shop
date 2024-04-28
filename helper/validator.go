@@ -21,6 +21,8 @@ func msgForTag(fe validator.FieldError) string {
 		return "Minimum character " + fe.Param()
 	case "number":
 		return "Must be a number"
+	case "alpha":
+		return "Must not contain numbers"
 	}
 
 	return fe.Error()
