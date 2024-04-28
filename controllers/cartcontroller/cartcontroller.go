@@ -242,7 +242,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 	var cart models.Cart
 	if models.DB.Delete(&cart, id).RowsAffected == 0 {
-		response := map[string]string{"message": "failed to delete this product"}
+		response := map[string]string{"message": "failed to delete this cart"}
 		helper.JSONResponse(w, http.StatusInternalServerError, response)
 		return
 	}
