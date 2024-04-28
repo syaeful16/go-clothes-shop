@@ -6,6 +6,6 @@ type UserDetail struct {
 	PhoneNumber string `gorm:"type:varchar(255); not null" json:"phone_number" validate:"required,number"`
 	Email       string `gorm:"type:varchar(255)" json:"email" validate:"email"`
 	Gender      string `gorm:"type:varchar(255)" json:"gender" validate:"required"`
-	UserID      uint   `json:"user_id"`
-	User        User   `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
+	UserID      uint   `gorm:"unique" json:"user_id"`
+	User        User   `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE" json:"-" validate:"-"`
 }

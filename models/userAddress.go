@@ -7,6 +7,5 @@ type UserAddress struct {
 	Address       string `gorm:"type:text; not null" json:"address" validate:"required"`
 	DetailAddress string `gorm:"type:varchar(255); not null" json:"detail_address" validate:"required,min=25"`
 	AddressName   string `gorm:"type:varchar(255); not null" json:"address_name" validate:"required"`
-	Status        bool   `gorm:"type:bool" json:"status"`
 	UserID        uint   `json:"user_id"`
 }
