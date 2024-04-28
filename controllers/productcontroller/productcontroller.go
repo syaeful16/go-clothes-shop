@@ -83,9 +83,9 @@ func Show(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := models.DB.Where("id = ?", id).First(&product).Error; err != nil {
+	if err := models.DB.First(&product, id).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
-			response := map[string]string{"message": err.Error()}
+			response := map[string]string{"message": err.Error() + " product"}
 			helper.JSONResponse(w, http.StatusNotFound, response)
 			return
 		}
@@ -95,7 +95,12 @@ func Show(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var user models.User
-	if err := models.DB.Where("id = ?", product.UserID).First(&user).Error; err != nil {
+	if err := models.DB.First(&user, product.UserID).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			response := map[string]string{"message": err.Error() + " user"}
+			helper.JSONResponse(w, http.StatusNotFound, response)
+			return
+		}
 		response := map[string]string{"message": err.Error()}
 		helper.JSONResponse(w, http.StatusInternalServerError, response)
 		return
